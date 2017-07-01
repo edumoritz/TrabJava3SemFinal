@@ -1,8 +1,6 @@
 package br.casa.telacadastro;
 
-import java.awt.EventQueue;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;

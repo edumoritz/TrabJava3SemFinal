@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.casa.telacadastro.AtivadorCliente;
+import br.casa.telaleitor.JanelaLista;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -53,6 +54,11 @@ public class TelaPrincipal extends JFrame {
 		panel.setLayout(gbl_panel);
 
 		JButton btnListaurl = new JButton("ListaURL");
+		btnListaurl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abaLista();
+			}
+		});
 		GridBagConstraints gbc_btnListaurl = new GridBagConstraints();
 		gbc_btnListaurl.insets = new Insets(0, 0, 0, 5);
 		gbc_btnListaurl.gridx = 0;
@@ -74,6 +80,24 @@ public class TelaPrincipal extends JFrame {
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abaLista() {
+		JPanel painelLista = new JanelaLista();
+		
+		PainelWrepper wrapper = new PainelWrepper();
+
+		wrapper.setConteudo(painelLista);
+		wrapper.setTitulo("Lista de Produtos");
+		
+		wrapper.setAcaoFechar(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(wrapper);
+			}
+		});
+		tabbedPane.add("Lista", wrapper);
 	}
 
 	protected void abaCliente() {
