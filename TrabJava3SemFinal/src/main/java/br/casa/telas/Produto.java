@@ -29,6 +29,6 @@ public class Produto {
 	
 	@Override
 	public String toString() {
-		return "id: "+this.id+" descrição: "+this.descricao+" valor: "+this.valorDolar;
+		return "Id: "+this.id+" Descrição: "+this.descricao+" Valor: "+this.valorDolar;
 	}
 }
