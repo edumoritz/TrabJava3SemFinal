@@ -1,4 +1,4 @@
-package br.casa.telas;
+package br.casa.telaleitor;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

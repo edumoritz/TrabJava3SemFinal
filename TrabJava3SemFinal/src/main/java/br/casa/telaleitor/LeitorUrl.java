@@ -1,4 +1,4 @@
-package br.casa.telas;
+package br.casa.telaleitor;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
