@@ -13,8 +13,8 @@ public class ConnectionBD {
 		try {
 			this.con = DriverManager
 					.getConnection(
-							"jdbc:postgresql://localhost:5432/cadastros", 
-							"postgres", "bancodojava");
+							"jdbc:postgresql://localhost:5432/bancodojava", 
+							"postgres", "banco");
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 				

@@ -18,6 +18,7 @@ public class JanelaMain extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JButton btnCrateTable;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,9 +40,9 @@ public class JanelaMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0};
+		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -51,14 +52,29 @@ public class JanelaMain extends JFrame {
 				carregar();
 			}
 		});
+		
+		btnCrateTable = new JButton("CriarTabela\r\n");
+		btnCrateTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createTable();
+			}
+		});
+		GridBagConstraints gbc_btnCrateTable = new GridBagConstraints();
+		gbc_btnCrateTable.anchor = GridBagConstraints.EAST;
+		gbc_btnCrateTable.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCrateTable.gridx = 0;
+		gbc_btnCrateTable.gridy = 0;
+		contentPane.add(btnCrateTable, gbc_btnCrateTable);
 		GridBagConstraints gbc_btnCarregar = new GridBagConstraints();
+		gbc_btnCarregar.anchor = GridBagConstraints.WEST;
 		gbc_btnCarregar.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCarregar.gridx = 0;
+		gbc_btnCarregar.gridx = 1;
 		gbc_btnCarregar.gridy = 0;
 		contentPane.add(btnCarregar, gbc_btnCarregar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 1;
@@ -66,6 +82,11 @@ public class JanelaMain extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+	}
+
+	protected void createTable() {
+		UtilSql us = new UtilSql();
+		us.createTableSql();
 	}
 
 	protected void carregar() {
