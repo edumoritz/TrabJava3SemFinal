@@ -1,13 +1,15 @@
 package br.casa.telas;
 
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ProdutoModel extends AbstractTableModel {
 
 	private List<Produto> lista;
-	private BigDecimal valor;
+	
+	public ProdutoModel(List<Produto> list) {
+		this.lista = list;
+	}
 
 	@Override
 	public int getRowCount() {
@@ -16,7 +18,7 @@ public class ProdutoModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 4;
+		return 3;
 	}
 
 	@Override
@@ -30,8 +32,6 @@ public class ProdutoModel extends AbstractTableModel {
 			return p.getDescricao();
 		case 2:
 			return p.getValorDolar();
-		case 3:
-			return p.getValorDolar().multiply(this.valor);
 		}
 		return null;
 	}

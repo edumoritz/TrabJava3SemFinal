@@ -1,8 +1,6 @@
 package br.casa.telas;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +11,7 @@ import javax.swing.JScrollPane;
 import java.awt.Insets;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class JanelaMain extends JFrame {
@@ -20,9 +19,6 @@ public class JanelaMain extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,9 +32,6 @@ public class JanelaMain extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public JanelaMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -77,7 +70,15 @@ public class JanelaMain extends JFrame {
 
 	protected void carregar() {
 		String url = "http://www.master10.com.py/lista-txt/download";
+		LeitorUrl lu = new LeitorUrl();
 		
+		try {
+			List<Produto> list = lu.lerProdutos(url);
+			ProdutoModel model = new ProdutoModel(list);
+			table.setModel(model);
+		} catch (Exception e) {
+			
+		}
 		
 	}
 
