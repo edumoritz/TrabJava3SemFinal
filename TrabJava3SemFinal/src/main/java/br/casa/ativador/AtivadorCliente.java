@@ -1,10 +1,15 @@
-package br.casa.telacadastro;
+package br.casa.ativador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+
+import br.casa.dao.ClasseDao;
+import br.casa.pojo.Cliente;
+import br.casa.tabelas.ClienteModel;
+import br.casa.telas.TelaCliente;
 
 public class AtivadorCliente extends TelaCliente{
 	

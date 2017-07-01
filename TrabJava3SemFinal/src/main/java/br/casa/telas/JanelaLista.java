@@ -1,4 +1,4 @@
-package br.casa.telaleitor;
+package br.casa.telas;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -7,6 +7,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.JScrollPane;
 import java.awt.Insets;
 import javax.swing.JTable;
+
+import br.casa.ativador.LeitorUrl;
+import br.casa.dao.UtilSql;
+import br.casa.pojo.Produto;
+import br.casa.tabelas.ProdutoModel;
+
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;

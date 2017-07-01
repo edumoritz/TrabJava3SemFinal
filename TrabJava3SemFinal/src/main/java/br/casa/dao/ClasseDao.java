@@ -1,4 +1,4 @@
-package br.casa.telacadastro;
+package br.casa.dao;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.casa.planodecontas.ConnectionBD;
+import br.casa.pojo.Cliente;
 
 public class ClasseDao {
 

@@ -1,4 +1,4 @@
-package br.casa.telaleitor;
+package br.casa.pojo;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,9 @@
-package br.casa.telaleitor;
+package br.casa.tabelas;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
+import br.casa.pojo.Produto;
 
 public class ProdutoModel extends AbstractTableModel {
 

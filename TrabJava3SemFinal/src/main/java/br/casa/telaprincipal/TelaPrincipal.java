@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import br.casa.telacadastro.AtivadorCliente;
-import br.casa.telaleitor.JanelaLista;
+import br.casa.ativador.AtivadorCliente;
+import br.casa.telas.JanelaLista;
+import br.casa.telas.PainelOrcamento;
+import br.casa.telas.PainelWrepper;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -17,6 +19,9 @@ import java.awt.Insets;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 public class TelaPrincipal extends JFrame {
 
@@ -47,39 +52,69 @@ public class TelaPrincipal extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWidths = new int[]{73, 65, 85, 0};
+		gbl_panel.rowHeights = new int[]{30, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-
-		JButton btnListaurl = new JButton("ListaURL");
-		btnListaurl.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abaLista();
-			}
-		});
-		GridBagConstraints gbc_btnListaurl = new GridBagConstraints();
-		gbc_btnListaurl.insets = new Insets(0, 0, 0, 5);
-		gbc_btnListaurl.gridx = 0;
-		gbc_btnListaurl.gridy = 0;
-		panel.add(btnListaurl, gbc_btnListaurl);
-
-		JButton btnCliente = new JButton("Cliente");
-		btnCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abaCliente();
-			}
-		});
 		
-		GridBagConstraints gbc_btnCliente = new GridBagConstraints();
-		gbc_btnCliente.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCliente.gridx = 1;
-		gbc_btnCliente.gridy = 0;
-		panel.add(btnCliente, gbc_btnCliente);
+				JButton btnCliente = new JButton("Cliente");
+				btnCliente.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						abaCliente();
+					}
+				});
+				
+						JButton btnListaurl = new JButton("ListaURL");
+						btnListaurl.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								abaLista();
+							}
+						});
+						GridBagConstraints gbc_btnListaurl = new GridBagConstraints();
+						gbc_btnListaurl.insets = new Insets(0, 0, 0, 5);
+						gbc_btnListaurl.gridx = 0;
+						gbc_btnListaurl.gridy = 0;
+						panel.add(btnListaurl, gbc_btnListaurl);
+				GridBagConstraints gbc_btnCliente = new GridBagConstraints();
+				gbc_btnCliente.insets = new Insets(0, 0, 0, 5);
+				gbc_btnCliente.gridx = 1;
+				gbc_btnCliente.gridy = 0;
+				panel.add(btnCliente, gbc_btnCliente);
+		
+		JButton btnOramento = new JButton("Or\u00E7amento");
+		btnOramento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abaOrcamento();
+			}
+		});
+		GridBagConstraints gbc_btnOramento = new GridBagConstraints();
+		gbc_btnOramento.gridx = 2;
+		gbc_btnOramento.gridy = 0;
+		panel.add(btnOramento, gbc_btnOramento);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abaOrcamento() {
+		JPanel painelOrca = new PainelOrcamento();
+		
+		PainelWrepper wrapper = new PainelWrepper();
+
+		wrapper.setConteudo(painelOrca);
+		wrapper.setTitulo("Painel de Orçamento");
+		
+		wrapper.setAcaoFechar(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(wrapper);
+			}
+		});
+		
+		tabbedPane.add("Orçamento", wrapper);
+		
 	}
 
 	protected void abaLista() {
@@ -97,6 +132,7 @@ public class TelaPrincipal extends JFrame {
 				tabbedPane.remove(wrapper);
 			}
 		});
+		
 		tabbedPane.add("Lista", wrapper);
 	}
 

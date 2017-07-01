@@ -1,9 +1,11 @@
-package br.casa.telacadastro;
+package br.casa.tabelas;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import br.casa.pojo.Cliente;
 
 public class ClienteModel extends AbstractTableModel {
 

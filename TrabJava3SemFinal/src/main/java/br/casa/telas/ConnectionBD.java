@@ -1,4 +1,4 @@
-package br.casa.telaleitor;
+package br.casa.telas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

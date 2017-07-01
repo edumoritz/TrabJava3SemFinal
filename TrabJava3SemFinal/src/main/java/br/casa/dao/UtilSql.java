@@ -1,4 +1,4 @@
-package br.casa.telaleitor;
+package br.casa.dao;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.casa.planodecontas.ConnectionBD;
+import br.casa.pojo.Produto;
 
 
 public class UtilSql {

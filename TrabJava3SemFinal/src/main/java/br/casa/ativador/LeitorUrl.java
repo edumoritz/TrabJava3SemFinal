@@ -1,4 +1,4 @@
-package br.casa.telaleitor;
+package br.casa.ativador;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import br.casa.dao.UtilSql;
+import br.casa.pojo.Produto;
 
 
 public class LeitorUrl {

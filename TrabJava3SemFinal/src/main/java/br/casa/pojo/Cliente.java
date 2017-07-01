@@ -1,4 +1,4 @@
-package br.casa.telacadastro;
+package br.casa.pojo;
 
 public class Cliente {
 	

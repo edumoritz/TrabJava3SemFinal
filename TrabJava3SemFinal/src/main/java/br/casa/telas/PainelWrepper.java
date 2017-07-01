@@ -1,4 +1,4 @@
-package br.casa.telaprincipal;
+package br.casa.telas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

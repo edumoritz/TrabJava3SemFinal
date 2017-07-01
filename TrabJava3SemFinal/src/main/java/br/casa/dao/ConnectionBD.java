@@ -1,4 +1,4 @@
-package br.casa.telacadastro;
+package br.casa.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package br.casa.telacadastro;
+package br.casa.telas;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -14,7 +14,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import br.casa.dao.ClasseDao;
+
 import java.awt.Component;
 
 public class TelaCliente extends JPanel {
@@ -129,7 +131,6 @@ public class TelaCliente extends JPanel {
 		gbc_txtTelefone.gridy = 2;
 		panel.add(txtTelefone, gbc_txtTelefone);
 		txtTelefone.setColumns(15);
-		panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblId, txtId, lblCarregadoParaAlterao, lblNome, txtNome, lblTelefone, txtTelefone}));
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
