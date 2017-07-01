@@ -1,4 +1,4 @@
-package planodecontas;
+package br.casa.planodecontas;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

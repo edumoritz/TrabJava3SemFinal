@@ -1,4 +1,4 @@
-package planodecontas;
+package br.casa.planodecontas;
 
 import java.util.ArrayList;
 import java.util.List;

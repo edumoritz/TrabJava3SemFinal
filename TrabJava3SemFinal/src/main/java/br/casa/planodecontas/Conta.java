@@ -1,4 +1,4 @@
-package planodecontas;
+package br.casa.planodecontas;
 
 import java.math.BigDecimal;
 

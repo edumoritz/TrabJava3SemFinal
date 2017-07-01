@@ -1,13 +1,13 @@
-package planodecontas;
+package br.casa.planodecontas;
 
 import java.math.BigDecimal;
 
 import javax.swing.JOptionPane;
 
-import planodecontas.UniNodeImpl;
-import planodecontas.UniNode;
-import planodecontas.UtilConta;
-import planodecontas.UtilTree;
+import br.casa.planodecontas.UniNode;
+import br.casa.planodecontas.UniNodeImpl;
+import br.casa.planodecontas.UtilConta;
+import br.casa.planodecontas.UtilTree;
 
 public class Main {
 	

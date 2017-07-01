@@ -1,4 +1,4 @@
-package planodecontas;
+package br.casa.planodecontas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
