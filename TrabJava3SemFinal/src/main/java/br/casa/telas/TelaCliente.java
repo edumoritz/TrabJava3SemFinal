@@ -14,10 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-
 import br.casa.dao.ClasseDao;
-
-import java.awt.Component;
 
 public class TelaCliente extends JPanel {
 	
