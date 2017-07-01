@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import br.casa.planodecontas.ConnectionBD;
 
@@ -34,7 +35,7 @@ public class UtilSql {
 				if(tipoParametro.equals(String.class)){
 					tipoColuna = "VARCHAR(100) NOT NULL";
 				} else if (tipoParametro.equals(Long.class)){
-					tipoColuna = "SERIAL  NOT NULL";
+					tipoColuna = "INT  NOT NULL";
 				} else if (tipoParametro.equals(BigDecimal.class)) {
 					tipoColuna = "NUMERIC  NOT NULL";
 				} else {
@@ -60,14 +61,49 @@ public class UtilSql {
 		}
 		System.out.println(sb.toString());
 		
-		
 		try {
 			con.prepareStatement(sb.toString()).execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+		return sb.toString();
+	}
+	
+	public String insertSql(Produto produto){
+		StringBuilder sb = new StringBuilder();
+		Produto pt = new Produto();
 		
+		try {
+			Class<?> clazz = pt.getClass();
+			Field[] fields = clazz.getDeclaredFields();
+			
+			sb.append("INSERT INTO ").append(clazz.getSimpleName()).append(" (");
+			
+			for(int i = 0; i < fields.length; i++){
+				Field fd = fields[i];
+				if(i > 0){
+					sb.append(", ");
+				}
+				sb.append(fd.getName());
+			}
+			
+			sb.append(")").append(" VALUES (");
+			
+			sb.append(produto.getId()).append(", ").append("'"+produto.getDescricao()+"'").append(", ");
+			sb.append(produto.getValorDolar());
+			sb.append(");");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(sb.toString());
+		
+		try {
+			con.prepareStatement(sb.toString()).execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return sb.toString();
 	}
 }

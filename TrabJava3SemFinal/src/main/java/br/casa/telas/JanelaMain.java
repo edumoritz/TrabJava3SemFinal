@@ -98,9 +98,8 @@ public class JanelaMain extends JFrame {
 			ProdutoModel model = new ProdutoModel(list);
 			table.setModel(model);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
-		
 	}
 
 }

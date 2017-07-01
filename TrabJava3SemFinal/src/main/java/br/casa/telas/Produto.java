@@ -27,8 +27,8 @@ public class Produto {
 		this.valorDolar = valorDolar;
 	}
 	
-	@Override
-	public String toString() {
-		return "id: "+this.id+" descrição: "+this.descricao+" Valor: "+this.getValorDolar();
-	}
+//	@Override
+//	public String toString() {
+//		return this.id+", "+this.descricao+", "+this.valorDolar;
+//	}
 }

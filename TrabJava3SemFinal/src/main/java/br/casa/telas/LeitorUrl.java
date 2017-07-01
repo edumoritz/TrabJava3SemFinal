@@ -36,8 +36,8 @@ public class LeitorUrl {
 	
 	private Pattern pattern = Pattern.compile("([0-9]+)(.*)US\\$ (.*)");
 	
-	private Produto lerProduto(String linha) {
-		
+	public Produto lerProduto(String linha) {
+		UtilSql us = new UtilSql();
 		Matcher mat = pattern.matcher(linha);
 		
 		Produto produto = new Produto();
@@ -53,18 +53,11 @@ public class LeitorUrl {
 			String strValorSemponto = strValorOriginal.replaceAll("\\.", "");
 			String strValorIngles = strValorSemponto.replaceAll(",", ".");
 			produto.setValorDolar(new BigDecimal(strValorIngles));
+			us.insertSql(produto);
 		} else {
 			throw new RuntimeException("Linha inválida: "+linha);
 		}
 		return produto;
 	}
-//	public static void main(String[] args) throws Exception {
-//		String url = "http://www.master10.com.py/lista-txt/download";
-//		LeitorUrl ltu = new LeitorUrl();
-//		List<Produto> lista = ltu.lerProdutos(url);
-//		lista.forEach((e) -> {
-//			System.out.println(e.toString());
-//		});
-//	}
 
 }
