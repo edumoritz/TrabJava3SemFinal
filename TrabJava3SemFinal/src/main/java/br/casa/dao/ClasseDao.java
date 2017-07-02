@@ -23,6 +23,7 @@ public class ClasseDao {
 	private static final String SQL_C_FILTER = "SELECT * FROM cliente WHERE nome LIKE ?";
 	//SQL DE PRODUTO
 	private static final String SQL_P_BUSCA_TODOS = "SELECT * FROM produto ORDER BY id";
+	private static final String SQL_P_FILTER = "SELECT * FROM produto WHERE descricao LIKE ?";
 	//CONECTA AO BANCO
 	private Connection con = ConnectionBD.getInstance().getConnection();
 
@@ -128,6 +129,27 @@ public class ClasseDao {
 				ct.setNome(rs.getString(2));
 				ct.setTelefone(rs.getString(3));
 				lista.add(ct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
+	public List<Produto> filterProduto(String palavra) {
+		List<Produto> lista = new ArrayList<>();
+
+		try {
+			PreparedStatement ps = con.prepareStatement(SQL_P_FILTER);
+			ps.setString(1, "%"+palavra+"%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Produto pt = new Produto();
+				pt.setId(Integer.parseInt(rs.getString(1)));
+				pt.setDescricao(rs.getString(2));
+				pt.setValorDolar(new BigDecimal(rs.getString(3)));
+				lista.add(pt);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

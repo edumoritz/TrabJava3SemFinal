@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.casa.dao.ClasseDao;
-import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
 import br.casa.tabelas.ProdutoModel;
 import java.awt.Insets;
@@ -32,7 +31,7 @@ public class PainelBuscaProduto extends JFrame {
 	private ProdutoModel prodModel;
 
 	public PainelBuscaProduto() {
-		setBounds(500, 100, 450, 300);
+		setBounds(700, 200, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -130,10 +129,13 @@ public class PainelBuscaProduto extends JFrame {
 	
 	protected void busca(String trim) {
 		ClasseDao dao = new ClasseDao();
-		List<Produto> list = dao.getTodosP();
-		this.prodModel = new ProdutoModel(list);
-		table.setModel(prodModel);
-		
+		if(trim.isEmpty()){
+			List<Produto> list = dao.getTodosP();
+		} else {
+			List<Produto> list = dao.filterProduto(trim);
+			this.prodModel = new ProdutoModel(list);
+			table.setModel(prodModel);
+		}
 	}
 
 	public void setOnOk(Consumer<Produto> c) {

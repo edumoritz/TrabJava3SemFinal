@@ -6,38 +6,44 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import br.casa.dao.ClasseDao;
+import br.casa.dao.UtilSql;
 import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
+import br.casa.tabelas.OrcamentoModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class PainelOrcamento extends JPanel {
 	private JTextField textID;
 	private JTable table;
 	private JTextField textCliente;
 	private JTextField textTelefone;
+	private OrcamentoModel orcModel;
 
 	public PainelOrcamento() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { 349, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
@@ -45,15 +51,16 @@ public class PainelOrcamento extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.gridwidth = 2;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 0, 107, 0, 0 };
+		gbl_panel_1.columnWidths = new int[] { 0, 107, 0, 0, 0 };
 		gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
@@ -83,10 +90,11 @@ public class PainelOrcamento extends JPanel {
 		panel_1.add(textID, gbc_textID);
 		textID.setColumns(5);
 
-		JLabel lblDigiteFPara = new JLabel("Digite F2 para filtrar");
+		JLabel lblDigiteFPara = new JLabel("Digite F2 para filtrar Cliente");
+		lblDigiteFPara.setForeground(Color.GRAY);
 		GridBagConstraints gbc_lblDigiteFPara = new GridBagConstraints();
 		gbc_lblDigiteFPara.anchor = GridBagConstraints.WEST;
-		gbc_lblDigiteFPara.insets = new Insets(0, 0, 5, 0);
+		gbc_lblDigiteFPara.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDigiteFPara.gridx = 2;
 		gbc_lblDigiteFPara.gridy = 0;
 		panel_1.add(lblDigiteFPara, gbc_lblDigiteFPara);
@@ -102,9 +110,9 @@ public class PainelOrcamento extends JPanel {
 
 		textCliente = new JTextField();
 		GridBagConstraints gbc_textCliente = new GridBagConstraints();
-		gbc_textCliente.gridwidth = 2;
+		gbc_textCliente.gridwidth = 3;
 		gbc_textCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textCliente.insets = new Insets(0, 0, 5, 0);
+		gbc_textCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_textCliente.gridx = 1;
 		gbc_textCliente.gridy = 1;
 		panel_1.add(textCliente, gbc_textCliente);
@@ -135,13 +143,28 @@ public class PainelOrcamento extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_btnInserirProduto = new GridBagConstraints();
+		gbc_btnInserirProduto.insets = new Insets(0, 0, 0, 5);
 		gbc_btnInserirProduto.anchor = GridBagConstraints.EAST;
 		gbc_btnInserirProduto.gridx = 2;
 		gbc_btnInserirProduto.gridy = 2;
 		panel_1.add(btnInserirProduto, gbc_btnInserirProduto);
+		
+		JButton btnDeletarProduto = new JButton("Deletar Produto");
+		btnDeletarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dropProduto();
+			}
+		});
+		GridBagConstraints gbc_btnDeletarProduto = new GridBagConstraints();
+		gbc_btnDeletarProduto.anchor = GridBagConstraints.WEST;
+		gbc_btnDeletarProduto.gridx = 3;
+		gbc_btnDeletarProduto.gridy = 2;
+		panel_1.add(btnDeletarProduto, gbc_btnDeletarProduto);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
@@ -149,6 +172,27 @@ public class PainelOrcamento extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
+		gbc_lblTotal.anchor = GridBagConstraints.EAST;
+		gbc_lblTotal.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTotal.gridx = 0;
+		gbc_lblTotal.gridy = 3;
+		add(lblTotal, gbc_lblTotal);
+		
+		JLabel lblResultado = new JLabel("resultado");
+		GridBagConstraints gbc_lblResultado = new GridBagConstraints();
+		gbc_lblResultado.gridx = 1;
+		gbc_lblResultado.gridy = 3;
+		add(lblResultado, gbc_lblResultado);
+	}
+
+	protected void dropProduto() {
+		UtilSql us = new UtilSql();
+		
+		
 	}
 
 	protected void abreBuscaProduto() {
@@ -158,7 +202,7 @@ public class PainelOrcamento extends JPanel {
 			
 			@Override
 			public void accept(Produto t) {
-				//preencherProd(t);
+				preencherProd(t);
 			}
 		});
 		buscaProd.setOnCancel(new Runnable() {
@@ -170,6 +214,15 @@ public class PainelOrcamento extends JPanel {
 			}
 		});
 		buscaProd.setVisible(true);
+		
+	}
+
+	protected void preencherProd(Produto t) {
+		UtilSql us = new UtilSql();
+		List<Produto> list = us.getTodosP();
+		us.insertSqlProd(t);
+		this.orcModel = new OrcamentoModel(list);
+		table.setModel(orcModel);
 		
 	}
 

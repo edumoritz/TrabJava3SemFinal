@@ -1,23 +1,20 @@
 package br.casa.tabelas;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import br.casa.pojo.Produto;
 
 public class OrcamentoModel extends AbstractTableModel {
 
-	private List<Produto> lista = new ArrayList<>();
-	BigDecimal dolar;
-	int qtd;
+	private List<Produto> lista;
+	
 
 	public void preencherResultado(List<Produto> result){
 		this.lista = result;
 		fireTableDataChanged();
 	}
-	public OrcamentoModel() {
-		// TODO Auto-generated constructor stub
+	public OrcamentoModel(List<Produto> list) {
+		this.lista = list;
 	}
 
 	@Override
