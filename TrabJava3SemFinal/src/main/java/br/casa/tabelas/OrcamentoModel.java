@@ -3,10 +3,7 @@ package br.casa.tabelas;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
-import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
 
 public class OrcamentoModel extends AbstractTableModel {

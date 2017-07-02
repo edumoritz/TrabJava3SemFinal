@@ -17,6 +17,8 @@ import br.casa.pojo.Cliente;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelOrcamento extends JPanel {
 	private JTextField textID;
@@ -126,6 +128,11 @@ public class PainelOrcamento extends JPanel {
 		textTelefone.setColumns(15);
 		
 		JButton btnInserirProduto = new JButton("Inserir Produto");
+		btnInserirProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abreBuscaProduto();
+			}
+		});
 		GridBagConstraints gbc_btnInserirProduto = new GridBagConstraints();
 		gbc_btnInserirProduto.anchor = GridBagConstraints.EAST;
 		gbc_btnInserirProduto.gridx = 2;
@@ -141,6 +148,11 @@ public class PainelOrcamento extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+	}
+
+	protected void abreBuscaProduto() {
+		PainelBuscaProduto buscaProd = new PainelBuscaProduto();
+		
 	}
 
 	protected void abreBusca() {
@@ -162,7 +174,6 @@ public class PainelOrcamento extends JPanel {
 			}
 		});
 		painelBusca.setVisible(true);
-		
 	}
 
 	protected void limparCampos() {

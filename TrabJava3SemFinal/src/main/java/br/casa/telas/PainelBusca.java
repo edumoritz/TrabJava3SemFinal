@@ -1,18 +1,12 @@
 package br.casa.telas;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import br.casa.dao.ClasseDao;
 import br.casa.pojo.Cliente;
-import br.casa.pojo.Produto;
 import br.casa.tabelas.ClienteModel;
-import br.casa.tabelas.OrcamentoModel;
-
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -22,7 +16,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.function.Consumer;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
@@ -36,21 +29,8 @@ public class PainelBusca extends JFrame {
 	private Runnable runnableOnCancel;
 	private ClienteModel tableModelC;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PainelBusca frame = new PainelBusca();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public PainelBusca() {
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
