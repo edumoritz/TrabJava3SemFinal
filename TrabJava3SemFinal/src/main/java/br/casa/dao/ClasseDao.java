@@ -16,106 +16,108 @@ public class ClasseDao {
 
 	private static final String SQL_C_BUSCA_TODOS = "SELECT * FROM cliente ORDER BY id";
 	private static final String SQL_C_INSERE = "INSERT INTO cliente(id, nome, telefone)VALUES(?, ?, ?)";
-	private static final String SQL_C_EXCLUI ="DELETE FROM cliente WHERE id = ?";
+	private static final String SQL_C_EXCLUI = "DELETE FROM cliente WHERE id = ?";
 	private static final String SQL_C_ATUALIZA_NOME = "UPDATE cliente SET nome = ? WHERE id = ?";
 	private static final String SQL_C_ATUALIZA_TEL = "UPDATE cliente SET telefone = ? WHERE id = ?";
-//	private static final String SQL_C_FILTER = "SELECT * FROM contact WHERE nome LIKE '%?%'";
-	
+	private static final String SQL_C_FILTER = "SELECT * FROM cliente WHERE nome LIKE ?";
+
 	private Connection con = ConnectionBD.getInstance().getConnection();
-	
-	public String createTableSql(){
+
+	public String createTableSql() {
 		StringBuilder sb = new StringBuilder();
 		Cliente pt = new Cliente();
 		try {
 			Class<?> clazz = pt.getClass();
-			
+
 			sb.append("CREATE TABLE ").append(clazz.getSimpleName()).append(" (");
-			
+
 			Field[] fields = clazz.getDeclaredFields();
-			
-			for(int i = 0; i < fields.length; i++){
+
+			for (int i = 0; i < fields.length; i++) {
 				Field fd = fields[i];
-				
+
 				String nomeColuna = fd.getName();
 				String tipoColuna;
-				
+
 				Class<?> tipoParametro = fd.getType();
-				
-				if(tipoParametro.equals(String.class)){
+
+				if (tipoParametro.equals(String.class)) {
 					tipoColuna = "VARCHAR(100) NOT NULL";
-				} else if (tipoParametro.equals(int.class)){
+				} else if (tipoParametro.equals(int.class)) {
 					tipoColuna = "INT NOT NULL";
 				} else if (tipoParametro.equals(BigDecimal.class)) {
 					tipoColuna = "NUMERIC NOT NULL";
 				} else {
 					tipoColuna = "DESCONHECIDO";
 				}
-				if(i > 0){
+				if (i > 0) {
 					sb.append(",");
 				}
 				sb.append("\n\t").append(nomeColuna).append(' ').append(tipoColuna);
 			}
 			sb.append(",\n\tPRIMARY KEY(");
-			for(int i = 0; i < fields.length; i++){
+			for (int i = 0; i < fields.length; i++) {
 				Field fd = fields[i];
 				Class<?> tipoParametro = fd.getType();
-				if(tipoParametro.equals(int.class)){
+				if (tipoParametro.equals(int.class)) {
 					sb.append(fd.getName());
 				}
 			}
 			sb.append(")").append("\n);");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println(sb.toString());
-		
+
 		try {
 			con.prepareStatement(sb.toString()).execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return sb.toString();
 	}
-	
-	public List<Cliente> getTodosC(){
+
+	public List<Cliente> getTodosC() {
 		List<Cliente> lista = new ArrayList<>();
-		
-		try(PreparedStatement ps = con.prepareStatement(SQL_C_BUSCA_TODOS);
-				ResultSet rs = ps.executeQuery()){
-			while(rs.next()){
+
+		try (PreparedStatement ps = con.prepareStatement(SQL_C_BUSCA_TODOS); ResultSet rs = ps.executeQuery()) {
+			while (rs.next()) {
 				Cliente ct = new Cliente();
 				ct.setId(rs.getInt(1));
 				ct.setNome(rs.getString(2));
 				ct.setTelefone(rs.getString(3));
 				lista.add(ct);
 			}
-		} catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return lista;
 	}
-	
-//	public List<Cliente> filterCliente(String palavra){
-//		List<Cliente> lista = new ArrayList<>();
-//		
-//		try(PreparedStatement ps = con.prepareStatement(SQL_C_FILTER);
-//				ResultSet rs = ps.executeQuery()){
-//			while(rs.next()){
-//				Cliente ct = new Cliente();
-//				ct.setId(rs.getInt(1));
-//				ct.setNome(rs.getString(2));
-//				ct.setTelefone(rs.getString(3));
-//				lista.add(ct);
-//			}
-//		} catch(SQLException e){
-//			e.printStackTrace();
-//		}
-//		
-//		return lista;
-//	}
-	public void insereC(Cliente c){
+
+	public List<Cliente> filterCliente(String palavra) {
+		List<Cliente> lista = new ArrayList<>();
+
+		try {
+			PreparedStatement ps = con.prepareStatement(SQL_C_FILTER);
+			ps.setString(1, "%"+palavra+"%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Cliente ct = new Cliente();
+				ct.setId(Integer.parseInt(rs.getString(1)));
+				ct.setNome(rs.getString(2));
+				ct.setTelefone(rs.getString(3));
+				lista.add(ct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+
+	public void insereC(Cliente c) {
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(SQL_C_INSERE);
@@ -127,8 +129,8 @@ public class ClasseDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public void atualizaC(int id, Cliente c){
+
+	public void atualizaC(int id, Cliente c) {
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(SQL_C_ATUALIZA_NOME);
@@ -138,7 +140,7 @@ public class ClasseDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			ps = con.prepareStatement(SQL_C_ATUALIZA_TEL);
 			ps.setString(1, c.getTelefone());
@@ -148,9 +150,10 @@ public class ClasseDao {
 			e.printStackTrace();
 		}
 	}
-	public void excluiC(int id){
+
+	public void excluiC(int id) {
 		PreparedStatement ps;
-		
+
 		try {
 			ps = con.prepareStatement(SQL_C_EXCLUI);
 			ps.setInt(1, id);
@@ -158,7 +161,7 @@ public class ClasseDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

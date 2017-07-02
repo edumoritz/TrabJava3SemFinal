@@ -6,10 +6,16 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import br.casa.pojo.Cliente;
+import br.casa.pojo.Produto;
 
 public class ClienteModel extends AbstractTableModel {
 
 	private List<Cliente> lista;
+	
+	public void preencherResultado(List<Cliente> result){
+		this.lista = result;
+		fireTableDataChanged();
+	}
 
 	public ClienteModel() {
 		this((List<Cliente>) null);

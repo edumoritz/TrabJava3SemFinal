@@ -1,22 +1,26 @@
 package br.casa.tabelas;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
 import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
 
-public class ProdutoModel extends AbstractTableModel {
+public class OrcamentoModel extends AbstractTableModel {
 
-	private List<Produto> lista;
-	
+	private List<Produto> lista = new ArrayList<>();
+	BigDecimal dolar;
+	int qtd;
+
 	public void preencherResultado(List<Produto> result){
 		this.lista = result;
 		fireTableDataChanged();
 	}
-	
-	public ProdutoModel(List<Produto> list) {
-		this.lista = list;
+	public OrcamentoModel() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -43,25 +47,24 @@ public class ProdutoModel extends AbstractTableModel {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public String getColumnName(int column) {
-		switch(column){
+		switch (column) {
 		case 0:
 			return "ID";
-		case 1: 
-			return "Descrição";
+		case 1:
+			return "DESCRICAO";
 		case 2:
-			return "Dolar";
+			return "VALOR";
 		}
 		return null;
 	}
-	
+
 	public Produto getProdutoAt(int idx){
 		if(idx >= this.lista.size()){
 			return null;
 		}
 		return this.lista.get(idx);
 	}
-
 }
