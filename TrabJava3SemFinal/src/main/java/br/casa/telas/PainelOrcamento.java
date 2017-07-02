@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 import br.casa.pojo.Cliente;
+import br.casa.pojo.Produto;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -153,6 +154,23 @@ public class PainelOrcamento extends JPanel {
 	protected void abreBuscaProduto() {
 		PainelBuscaProduto buscaProd = new PainelBuscaProduto();
 		
+		buscaProd.setOnOk(new Consumer<Produto>() {
+			
+			@Override
+			public void accept(Produto t) {
+				//preencherProd(t);
+			}
+		});
+		buscaProd.setOnCancel(new Runnable() {
+			
+			@Override
+			public void run() {
+				limparCampos();
+				
+			}
+		});
+		buscaProd.setVisible(true);
+		
 	}
 
 	protected void abreBusca() {
@@ -180,7 +198,6 @@ public class PainelOrcamento extends JPanel {
 		textID.setText("");
 		textCliente.setText("");
 		textTelefone.setText("");
-		
 	}
 
 	protected void preencher(Cliente t) {

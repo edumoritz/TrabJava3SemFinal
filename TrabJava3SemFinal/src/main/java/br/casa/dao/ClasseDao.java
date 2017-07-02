@@ -11,16 +11,19 @@ import java.util.List;
 
 import br.casa.planodecontas.ConnectionBD;
 import br.casa.pojo.Cliente;
+import br.casa.pojo.Produto;
 
 public class ClasseDao {
-
+	//SQL DE CLIENTE
 	private static final String SQL_C_BUSCA_TODOS = "SELECT * FROM cliente ORDER BY id";
 	private static final String SQL_C_INSERE = "INSERT INTO cliente(id, nome, telefone)VALUES(?, ?, ?)";
 	private static final String SQL_C_EXCLUI = "DELETE FROM cliente WHERE id = ?";
 	private static final String SQL_C_ATUALIZA_NOME = "UPDATE cliente SET nome = ? WHERE id = ?";
 	private static final String SQL_C_ATUALIZA_TEL = "UPDATE cliente SET telefone = ? WHERE id = ?";
 	private static final String SQL_C_FILTER = "SELECT * FROM cliente WHERE nome LIKE ?";
-
+	//SQL DE PRODUTO
+	private static final String SQL_P_BUSCA_TODOS = "SELECT * FROM produto ORDER BY id";
+	//CONECTA AO BANCO
 	private Connection con = ConnectionBD.getInstance().getConnection();
 
 	public String createTableSql() {
@@ -95,7 +98,23 @@ public class ClasseDao {
 		}
 		return lista;
 	}
+	
+	public List<Produto> getTodosP() {
+		List<Produto> lista = new ArrayList<>();
 
+		try (PreparedStatement ps = con.prepareStatement(SQL_P_BUSCA_TODOS); ResultSet rs = ps.executeQuery()) {
+			while (rs.next()) {
+				Produto ct = new Produto();
+				ct.setId(rs.getInt(1));
+				ct.setDescricao(rs.getString(2));
+				ct.setValorDolar(new BigDecimal(rs.getString(3)));
+				lista.add(ct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
 	public List<Cliente> filterCliente(String palavra) {
 		List<Cliente> lista = new ArrayList<>();
 
