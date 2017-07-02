@@ -17,7 +17,6 @@ public class PainelWrepper extends JPanel{
 
 	private JButton btnXis;
 	private JLabel labelTitulo;
-	private JButton btnPDF;
 
 	public PainelWrepper() {
 		setLayout(new BorderLayout(0, 0));
@@ -41,16 +40,6 @@ public class PainelWrepper extends JPanel{
 		gbc_lblNewLabel.gridy = 0;
 		panel.add(labelTitulo, gbc_lblNewLabel);
 
-		btnPDF = new JButton("Exportar");
-		btnPDF.setMargin(new Insets(2, 5, 2, 5));
-		btnPDF.setActionCommand("ExportarPDF");
-		GridBagConstraints gbc_btnPDF = new GridBagConstraints();
-		gbc_btnPDF.anchor = GridBagConstraints.EAST;
-		gbc_btnPDF.insets = new Insets(0, 0, 0, 5);
-		gbc_btnPDF.gridx = 1;
-		gbc_btnPDF.gridy = 0;
-		panel.add(btnPDF, gbc_btnPDF);
-
 		btnXis = new JButton("X");
 		GridBagConstraints gbc_btnXis = new GridBagConstraints();
 		gbc_btnXis.anchor = GridBagConstraints.EAST;
@@ -70,9 +59,5 @@ public class PainelWrepper extends JPanel{
 
 	public void setTitulo(String titulo) {
 		labelTitulo.setText(titulo);
-	}
-
-	public void setAcaoExportar(ActionListener action) {
-		btnPDF.addActionListener(action);
 	}
 }

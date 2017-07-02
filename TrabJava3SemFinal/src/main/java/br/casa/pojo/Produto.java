@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 public class Produto {
 
-	private Long id;
+	private int id;
 	private String descricao;
 	private BigDecimal valorDolar;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getDescricao() {

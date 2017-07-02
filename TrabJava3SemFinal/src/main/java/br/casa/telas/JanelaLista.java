@@ -8,12 +8,19 @@ import javax.swing.JScrollPane;
 import java.awt.Insets;
 import javax.swing.JTable;
 
+import org.postgresql.util.PSQLException;
+
 import br.casa.ativador.LeitorUrl;
 import br.casa.dao.UtilSql;
+import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
+import br.casa.tabelas.ClienteModel;
 import br.casa.tabelas.ProdutoModel;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -23,6 +30,8 @@ public class JanelaLista extends JPanel {
 	private JTable table;
 	private JButton btnCrateTable;
 	private JPanel panel;
+	private ProdutoModel tabelaModel;
+	private Produto prod;
 
 	public JanelaLista() {
 
@@ -78,6 +87,21 @@ public class JanelaLista extends JPanel {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		UtilSql us = new UtilSql();
+		if(us.VerificarNoBanco() == false){
+			carregaLista();
+		} 
+		
+	}
+	
+
+	private void carregaLista() {
+		UtilSql us = new UtilSql();
+		List<Produto> list = us.getTodos();
+		
+		this.tabelaModel = new ProdutoModel(list);
+		this.table.setModel(tabelaModel);
 	}
 
 	protected void createTable() {
@@ -97,5 +121,6 @@ public class JanelaLista extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

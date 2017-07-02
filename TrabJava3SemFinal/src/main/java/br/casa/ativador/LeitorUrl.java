@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,7 +48,7 @@ public class LeitorUrl {
 		if(mat.matches()){
 			
 			String strId = mat.group(1).trim();
-			produto.setId(Long.parseLong(strId));
+			produto.setId(Integer.parseInt(strId));
 			
 			String desc = mat.group(2).trim();
 			produto.setDescricao(desc);
@@ -56,6 +57,7 @@ public class LeitorUrl {
 			String strValorSemponto = strValorOriginal.replaceAll("\\.", "");
 			String strValorIngles = strValorSemponto.replaceAll(",", ".");
 			produto.setValorDolar(new BigDecimal(strValorIngles));
+			
 			us.insertSql(produto);
 		} else {
 			throw new RuntimeException("Linha inválida: "+linha);

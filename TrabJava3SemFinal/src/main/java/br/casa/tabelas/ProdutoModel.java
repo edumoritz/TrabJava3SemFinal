@@ -3,6 +3,7 @@ package br.casa.tabelas;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
 
 public class ProdutoModel extends AbstractTableModel {
@@ -34,6 +35,19 @@ public class ProdutoModel extends AbstractTableModel {
 			return p.getDescricao();
 		case 2:
 			return p.getValorDolar();
+		}
+		return null;
+	}
+	
+	@Override
+	public String getColumnName(int column) {
+		switch(column){
+		case 0:
+			return "ID";
+		case 1: 
+			return "Descrição";
+		case 2:
+			return "Dolar";
 		}
 		return null;
 	}
