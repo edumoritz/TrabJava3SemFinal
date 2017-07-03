@@ -187,16 +187,32 @@ public class PainelOrcamento extends JPanel {
 		gbc_lblResultado.gridx = 1;
 		gbc_lblResultado.gridy = 3;
 		add(lblResultado, gbc_lblResultado);
+		
+		UtilSql us = new UtilSql();
+		if(us.VerificarNoBanco() == false){
+			carregaLista();
+		} 
 	}
-//	Estou tentando pegar o valor id de produto de uma linha para dropar na tabela e no banco.
+	private void carregaLista() {
+		UtilSql us = new UtilSql();
+		List<Produto> list = us.getTodosP();
+		
+		this.orcModel = new OrcamentoModel(list);
+		table.setModel(orcModel);
+		this.orcModel.fireTableDataChanged();
+		
+	}
 	protected void dropProduto() {
-//		UtilSql us = new UtilSql();
-//		int idx = (int) table.getValueAt(table.getSelectedRow(), 0);
-//		us.dropRow(idx);
-//		
-//		System.out.println(idx);
-//		table.setModel(orcModel);
-//		this.orcModel.fireTableDataChanged();
+		UtilSql us = new UtilSql();
+		int row = table.getSelectedRow();
+		if(row > -1){
+			int column = table.getSelectedColumn();
+			Object value = table.getValueAt(row, column);
+			us.dropRow(value);
+		}
+		
+		table.setModel(orcModel);
+		this.orcModel.fireTableDataChanged();
 
 	}
 
