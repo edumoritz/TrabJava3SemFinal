@@ -239,6 +239,22 @@ public class UtilSql {
 		}
 		return lista;
 	}
+	public void dropRow(int idx){
+		try {
+			PreparedStatement ps = con.prepareStatement(SQL_ORC_DROP);
+			ps.setInt(1, idx);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Produto ct = new Produto();
+				ct.setId(rs.getInt(1));
+				ct.setDescricao(rs.getString(2));
+				ct.setValorDolar(new BigDecimal(rs.getString(3)));
+			}
+			System.out.println(SQL_ORC_DROP);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public boolean VerificarNoBanco() {
 		boolean existe = true;

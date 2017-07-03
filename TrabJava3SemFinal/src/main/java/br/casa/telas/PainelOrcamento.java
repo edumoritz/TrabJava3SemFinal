@@ -77,7 +77,7 @@ public class PainelOrcamento extends JPanel {
 		textID.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_F2){
+				if (e.getKeyCode() == KeyEvent.VK_F2) {
 					abreBusca();
 				}
 			}
@@ -135,7 +135,7 @@ public class PainelOrcamento extends JPanel {
 		gbc_textTelefone.gridy = 2;
 		panel_1.add(textTelefone, gbc_textTelefone);
 		textTelefone.setColumns(15);
-		
+
 		JButton btnInserirProduto = new JButton("Inserir Produto");
 		btnInserirProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +148,7 @@ public class PainelOrcamento extends JPanel {
 		gbc_btnInserirProduto.gridx = 2;
 		gbc_btnInserirProduto.gridy = 2;
 		panel_1.add(btnInserirProduto, gbc_btnInserirProduto);
-		
+
 		JButton btnDeletarProduto = new JButton("Deletar Produto");
 		btnDeletarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -172,7 +172,7 @@ public class PainelOrcamento extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
@@ -181,64 +181,69 @@ public class PainelOrcamento extends JPanel {
 		gbc_lblTotal.gridx = 0;
 		gbc_lblTotal.gridy = 3;
 		add(lblTotal, gbc_lblTotal);
-		
+
 		JLabel lblResultado = new JLabel("resultado");
 		GridBagConstraints gbc_lblResultado = new GridBagConstraints();
 		gbc_lblResultado.gridx = 1;
 		gbc_lblResultado.gridy = 3;
 		add(lblResultado, gbc_lblResultado);
 	}
-
+//	Estou tentando pegar o valor id de produto de uma linha para dropar na tabela e no banco.
 	protected void dropProduto() {
-		UtilSql us = new UtilSql();
-		
-		
+//		UtilSql us = new UtilSql();
+//		int idx = (int) table.getValueAt(table.getSelectedRow(), 0);
+//		us.dropRow(idx);
+//		
+//		System.out.println(idx);
+//		table.setModel(orcModel);
+//		this.orcModel.fireTableDataChanged();
+
 	}
 
 	protected void abreBuscaProduto() {
 		PainelBuscaProduto buscaProd = new PainelBuscaProduto();
-		
+
 		buscaProd.setOnOk(new Consumer<Produto>() {
-			
+
 			@Override
 			public void accept(Produto t) {
 				preencherProd(t);
 			}
 		});
 		buscaProd.setOnCancel(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				limparCampos();
-				
+
 			}
 		});
 		buscaProd.setVisible(true);
-		
+
 	}
 
 	protected void preencherProd(Produto t) {
 		UtilSql us = new UtilSql();
-		List<Produto> list = us.getTodosP();
 		us.insertSqlProd(t);
+		List<Produto> list = us.getTodosP();
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
-		
+		this.orcModel.fireTableDataChanged();
 	}
 
 	protected void abreBusca() {
 		PainelBusca painelBusca = new PainelBusca();
-		
+
 		painelBusca.setOnOk(new Consumer<Cliente>() {
-			
+
 			@Override
 			public void accept(Cliente t) {
 				preencher(t);
 			}
 		});
-		
+
 		painelBusca.setOnCancel(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				limparCampos();
