@@ -19,6 +19,7 @@ import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.awt.EventQueue;
@@ -34,6 +35,7 @@ public class PainelBuscaProduto extends JFrame {
 	private Consumer<ProdutoOrc> consumerOnOkB;
 	private Runnable runnableOnCancel;
 	private ProdutoModel prodModel;
+	private OrcamentoModel orcModel;
 
 	public PainelBuscaProduto() {
 		setBounds(700, 200, 450, 300);
@@ -135,14 +137,22 @@ public class PainelBuscaProduto extends JFrame {
 	}
 	
 	protected void loadRow(int idx) {
+		List<ProdutoOrc> list = new ArrayList<>();
 		/*--------------------------------------------------------------*/
 		//inserir linha selecionada mais a quantidade na tabela orçamento
 		ProdutoOrc pto = new ProdutoOrc();
-		BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
-		pto.setQuantidade(qtd);
-		//pto.setId(idx);
+		BigDecimal colunaQtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
 		/*--------------------------------------------------------------*/
-		Produto pt = this.prodModel.getProdutoAt(idx);
+		//Object colunaId = table.getValueAt(idx, 0);
+		String colunaId = String.valueOf(table.getValueAt(idx, 0));
+		String colunaDescricao = String.valueOf(table.getValueAt(idx, 1));
+		String colunaVlr = String.valueOf(table.getValueAt(idx, 2));
+		pto.setId(Integer.parseInt((String) colunaId));
+		pto.setDescricao(colunaDescricao);
+		pto.setQuantidade(colunaQtd);
+		pto.setValorDolar(new BigDecimal(colunaVlr));
+		list.add(pto);
+		System.out.println("id: "+colunaId+"\ndesc: "+colunaDescricao+"\nQtd: "+colunaQtd+"\nVlor: "+colunaVlr);
 		
 		
 	}
