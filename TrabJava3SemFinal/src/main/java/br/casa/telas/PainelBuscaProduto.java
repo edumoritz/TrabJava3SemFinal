@@ -115,19 +115,9 @@ public class PainelBuscaProduto extends JFrame {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					e.consume();
 					int idx = table.getSelectedRow();
-					/*--------------------------------------------------------------*/
 					ProdutoOrc pol;
-					pol = loadRow(idx);//passando linha selecionada para função
+					pol = loadRow(idx);//FUNÇÃO PEGA VALORES DAS CEDULAS DE UMA LINHA SELECIONADA
 					PainelBuscaProduto.this.consumerOnOkB.accept(pol);
-					/*--------------------------------------------------------------*/
-//					if(idx != -1){
-//						ProdutoOrc pt = ((OrcamentoModel)table.getModel()).getProdutoAt(idx);
-//						if(pt == null){
-//							return;
-//						}
-//						PainelBuscaProduto.this.consumerOnOkB.accept(pt);
-//					}
-					
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 					if(PainelBuscaProduto.this.runnableOnCancel != null){
@@ -145,7 +135,6 @@ public class PainelBuscaProduto extends JFrame {
 		//inserir linha selecionada mais a quantidade na tabela orçamento
 		ProdutoOrc pto = new ProdutoOrc();
 		BigDecimal colunaQtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
-		/*--------------------------------------------------------------*/
 		String colunaId = String.valueOf(table.getValueAt(idx, 0));
 		String colunaDescricao = String.valueOf(table.getValueAt(idx, 1));
 		String colunaVlr = String.valueOf(table.getValueAt(idx, 2));
@@ -155,9 +144,7 @@ public class PainelBuscaProduto extends JFrame {
 		pto.setValorDolar(new BigDecimal(colunaVlr));
 		list.add(pto);
 		orcModel = new OrcamentoModel(list);
-//		table.setModel(orcModel);
-		//orcModel.addProdutoOrc(pto);
-		System.out.println("id: "+colunaId+"\ndesc: "+colunaDescricao+"\nQtd: "+colunaQtd+"\nVlor: "+colunaVlr);
+//		System.out.println("id: "+colunaId+"\ndesc: "+colunaDescricao+"\nQtd: "+colunaQtd+"\nVlor: "+colunaVlr);
 		return pto;
 	}
 

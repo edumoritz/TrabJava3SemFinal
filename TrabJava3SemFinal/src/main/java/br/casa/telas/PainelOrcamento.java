@@ -36,6 +36,7 @@ public class PainelOrcamento extends JPanel {
 	private JTextField textCliente;
 	private JTextField textTelefone;
 	private OrcamentoModel orcModel;
+	private BigDecimal vlrTotal;
 
 	public PainelOrcamento() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -246,6 +247,7 @@ public class PainelOrcamento extends JPanel {
 	protected void preencherProd(ProdutoOrc t) {
 		UtilSql us = new UtilSql();
 		us.insertSqlProd(t);
+//		vlrTotal = new BigDecimal((t.getQuantidade()) * (t.getValorDolar()));
 		List<ProdutoOrc> list = us.getTodosP();
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
