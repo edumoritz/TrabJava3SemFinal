@@ -1,19 +1,21 @@
 package br.casa.tabelas;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import br.casa.pojo.Produto;
+import br.casa.pojo.ProdutoOrc;
 
 public class OrcamentoModel extends AbstractTableModel {
 
-	private List<Produto> lista;
+	private List<ProdutoOrc> lista;
 	
 
-	public void preencherResultado(List<Produto> result){
+	public void preencherResultado(List<ProdutoOrc> result){
 		this.lista = result;
 		fireTableDataChanged();
 	}
-	public OrcamentoModel(List<Produto> list) {
+	public OrcamentoModel(List<ProdutoOrc> list) {
 		this.lista = list;
 	}
 
@@ -24,12 +26,12 @@ public class OrcamentoModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 3;
+		return 4;
 	}
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		Produto p = this.lista.get(row);
+		ProdutoOrc p = this.lista.get(row);
 
 		switch (column) {
 		case 0:
@@ -37,7 +39,10 @@ public class OrcamentoModel extends AbstractTableModel {
 		case 1:
 			return p.getDescricao();
 		case 2:
+			return p.getQuantidade();
+		case 3:
 			return p.getValorDolar();
+			
 		}
 		return null;
 	}
@@ -50,12 +55,14 @@ public class OrcamentoModel extends AbstractTableModel {
 		case 1:
 			return "DESCRICAO";
 		case 2:
+			return "QTD";
+		case 3:
 			return "VALOR";
 		}
 		return null;
 	}
 
-	public Produto getProdutoAt(int idx){
+	public ProdutoOrc getProdutoAt(int idx){
 		if(idx >= this.lista.size()){
 			return null;
 		}

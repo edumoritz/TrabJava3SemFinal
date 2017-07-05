@@ -3,6 +3,7 @@ package br.casa.telas;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.GridBagConstraints;
@@ -11,10 +12,13 @@ import javax.swing.border.EmptyBorder;
 
 import br.casa.dao.ClasseDao;
 import br.casa.pojo.Produto;
+import br.casa.pojo.ProdutoOrc;
+import br.casa.tabelas.OrcamentoModel;
 import br.casa.tabelas.ProdutoModel;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Consumer;
 import java.awt.EventQueue;
@@ -27,6 +31,7 @@ public class PainelBuscaProduto extends JFrame {
 	private JTextField textField;
 	private JTable table;
 	private Consumer<Produto> consumerOnOk;
+	private Consumer<ProdutoOrc> consumerOnOkB;
 	private Runnable runnableOnCancel;
 	private ProdutoModel prodModel;
 
@@ -107,13 +112,19 @@ public class PainelBuscaProduto extends JFrame {
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					e.consume();
+					/*--------------------------------------------------------------*/
+					//inserir linha selecionada mais a quantidade na tabela orçamento
+					ProdutoOrc pto = new ProdutoOrc();
+					BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
+					pto.setQuantidade(qtd);
+					/*--------------------------------------------------------------*/
 					int idx = table.getSelectedRow();
 					if(idx != -1){
-						Produto pt = ((ProdutoModel)table.getModel()).getProdutoAt(idx);
+						ProdutoOrc pt = ((OrcamentoModel)table.getModel()).getProdutoAt(idx);
 						if(pt == null){
 							return;
 						}
-						PainelBuscaProduto.this.consumerOnOk.accept(pt);
+						PainelBuscaProduto.this.consumerOnOkB.accept(pt);
 					}
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
@@ -131,6 +142,8 @@ public class PainelBuscaProduto extends JFrame {
 		ClasseDao dao = new ClasseDao();
 		if(trim.isEmpty()){
 			List<Produto> list = dao.getTodosP();
+			this.prodModel = new ProdutoModel(list);
+			table.setModel(prodModel);
 		} else {
 			List<Produto> list = dao.filterProduto(trim);
 			this.prodModel = new ProdutoModel(list);
@@ -157,6 +170,11 @@ public class PainelBuscaProduto extends JFrame {
 				textField.requestFocusInWindow();
 			}
 		});
+	}
+
+	public void setOnOkB(Consumer<ProdutoOrc> c) {
+		this.consumerOnOkB = c;
+		
 	}
 
 }

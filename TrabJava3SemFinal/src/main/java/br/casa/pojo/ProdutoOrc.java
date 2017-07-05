@@ -2,12 +2,12 @@ package br.casa.pojo;
 
 import java.math.BigDecimal;
 
-public class Produto {
-
+public class ProdutoOrc {
+	
 	private int id;
 	private String descricao;
+	private BigDecimal quantidade;
 	private BigDecimal valorDolar;
-	
 	public int getId() {
 		return id;
 	}
@@ -20,6 +20,12 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	public BigDecimal getQuantidade() {
+		return quantidade;
+	}
+	public void setQuantidade(BigDecimal quantidade) {
+		this.quantidade = quantidade;
+	}
 	public BigDecimal getValorDolar() {
 		return valorDolar;
 	}
@@ -27,4 +33,6 @@ public class Produto {
 		this.valorDolar = valorDolar;
 	}
 	
+	
+
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import br.casa.planodecontas.ConnectionBD;
 import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
+import br.casa.pojo.ProdutoOrc;
 
 public class UtilSql {
 
@@ -169,7 +170,7 @@ public class UtilSql {
 		return sb.toString();
 	}
 	
-	public String insertSqlProd(Produto produto) {
+	public String insertSqlProd(ProdutoOrc produto) {
 		StringBuilder sb = new StringBuilder();
 		Produto pt = new Produto();
 
@@ -190,7 +191,7 @@ public class UtilSql {
 			sb.append(")").append(" VALUES (");
 
 			sb.append(produto.getId()).append(", ").append("'" + produto.getDescricao() + "'").append(", ");
-			sb.append(produto.getValorDolar());
+			sb.append(produto.getQuantidade() + ", ").append(produto.getValorDolar());
 			sb.append(");");
 
 		} catch (Exception e) {
@@ -223,15 +224,16 @@ public class UtilSql {
 		}
 		return lista;
 	}
-	public List<Produto> getTodosP() {
-		List<Produto> lista = new ArrayList<>();
+	public List<ProdutoOrc> getTodosP() {
+		List<ProdutoOrc> lista = new ArrayList<>();
 
 		try (PreparedStatement ps = con.prepareStatement(SQL_ORC_BUSCA_TODOS); ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
-				Produto ct = new Produto();
+				ProdutoOrc ct = new ProdutoOrc();
 				ct.setId(rs.getInt(1));
 				ct.setDescricao(rs.getString(2));
-				ct.setValorDolar(new BigDecimal(rs.getString(3)));
+				ct.setQuantidade(new BigDecimal(rs.getString(3)));
+				ct.setValorDolar(new BigDecimal(rs.getString(4)));
 				lista.add(ct);
 			}
 		} catch (SQLException e) {

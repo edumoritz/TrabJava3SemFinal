@@ -6,10 +6,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Consumer;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -17,6 +20,7 @@ import br.casa.dao.ClasseDao;
 import br.casa.dao.UtilSql;
 import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
+import br.casa.pojo.ProdutoOrc;
 import br.casa.tabelas.OrcamentoModel;
 
 import javax.swing.JScrollPane;
@@ -183,6 +187,7 @@ public class PainelOrcamento extends JPanel {
 		add(lblTotal, gbc_lblTotal);
 
 		JLabel lblResultado = new JLabel("resultado");
+		//calular resultado..
 		GridBagConstraints gbc_lblResultado = new GridBagConstraints();
 		gbc_lblResultado.gridx = 1;
 		gbc_lblResultado.gridy = 3;
@@ -195,7 +200,7 @@ public class PainelOrcamento extends JPanel {
 	}
 	private void carregaLista() {
 		UtilSql us = new UtilSql();
-		List<Produto> list = us.getTodosP();
+		List<ProdutoOrc> list = us.getTodosP();
 		
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
@@ -219,10 +224,10 @@ public class PainelOrcamento extends JPanel {
 	protected void abreBuscaProduto() {
 		PainelBuscaProduto buscaProd = new PainelBuscaProduto();
 
-		buscaProd.setOnOk(new Consumer<Produto>() {
+		buscaProd.setOnOkB(new Consumer<ProdutoOrc>() {
 
 			@Override
-			public void accept(Produto t) {
+			public void accept(ProdutoOrc t) {
 				preencherProd(t);
 			}
 		});
@@ -238,10 +243,12 @@ public class PainelOrcamento extends JPanel {
 
 	}
 
-	protected void preencherProd(Produto t) {
+	protected void preencherProd(ProdutoOrc t) {
 		UtilSql us = new UtilSql();
+//		BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
+//		t.setQuantidade(qtd);
 		us.insertSqlProd(t);
-		List<Produto> list = us.getTodosP();
+		List<ProdutoOrc> list = us.getTodosP();
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
 		this.orcModel.fireTableDataChanged();
