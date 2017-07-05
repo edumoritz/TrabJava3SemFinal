@@ -66,6 +66,7 @@ public class OrcamentoModel extends AbstractTableModel {
 		if(idx >= this.lista.size()){
 			return null;
 		}
+		
 		return this.lista.get(idx);
 	}
 }

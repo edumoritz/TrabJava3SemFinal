@@ -112,13 +112,10 @@ public class PainelBuscaProduto extends JFrame {
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					e.consume();
-					/*--------------------------------------------------------------*/
-					//inserir linha selecionada mais a quantidade na tabela orçamento
-					ProdutoOrc pto = new ProdutoOrc();
-					BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
-					pto.setQuantidade(qtd);
-					/*--------------------------------------------------------------*/
 					int idx = table.getSelectedRow();
+					/*--------------------------------------------------------------*/
+					loadRow(idx);//passando linha selecionada para função
+					/*--------------------------------------------------------------*/
 					if(idx != -1){
 						ProdutoOrc pt = ((OrcamentoModel)table.getModel()).getProdutoAt(idx);
 						if(pt == null){
@@ -133,11 +130,23 @@ public class PainelBuscaProduto extends JFrame {
 					}
 				}
 			}
-		});
-		
+		});		
 		
 	}
 	
+	protected void loadRow(int idx) {
+		/*--------------------------------------------------------------*/
+		//inserir linha selecionada mais a quantidade na tabela orçamento
+		ProdutoOrc pto = new ProdutoOrc();
+		BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
+		pto.setQuantidade(qtd);
+		//pto.setId(idx);
+		/*--------------------------------------------------------------*/
+		Produto pt = this.prodModel.getProdutoAt(idx);
+		
+		
+	}
+
 	protected void busca(String trim) {
 		ClasseDao dao = new ClasseDao();
 		if(trim.isEmpty()){
