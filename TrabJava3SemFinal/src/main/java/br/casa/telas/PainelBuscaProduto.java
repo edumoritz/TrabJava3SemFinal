@@ -116,15 +116,18 @@ public class PainelBuscaProduto extends JFrame {
 					e.consume();
 					int idx = table.getSelectedRow();
 					/*--------------------------------------------------------------*/
-					loadRow(idx);//passando linha selecionada para função
+					ProdutoOrc pol;
+					pol = loadRow(idx);//passando linha selecionada para função
+					PainelBuscaProduto.this.consumerOnOkB.accept(pol);
 					/*--------------------------------------------------------------*/
-					if(idx != -1){
-						ProdutoOrc pt = ((OrcamentoModel)table.getModel()).getProdutoAt(idx);
-						if(pt == null){
-							return;
-						}
-						PainelBuscaProduto.this.consumerOnOkB.accept(pt);
-					}
+//					if(idx != -1){
+//						ProdutoOrc pt = ((OrcamentoModel)table.getModel()).getProdutoAt(idx);
+//						if(pt == null){
+//							return;
+//						}
+//						PainelBuscaProduto.this.consumerOnOkB.accept(pt);
+//					}
+					
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 					if(PainelBuscaProduto.this.runnableOnCancel != null){
@@ -136,14 +139,13 @@ public class PainelBuscaProduto extends JFrame {
 		
 	}
 	
-	protected void loadRow(int idx) {
+	protected ProdutoOrc loadRow(int idx) {
 		List<ProdutoOrc> list = new ArrayList<>();
 		/*--------------------------------------------------------------*/
 		//inserir linha selecionada mais a quantidade na tabela orçamento
 		ProdutoOrc pto = new ProdutoOrc();
 		BigDecimal colunaQtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
 		/*--------------------------------------------------------------*/
-		//Object colunaId = table.getValueAt(idx, 0);
 		String colunaId = String.valueOf(table.getValueAt(idx, 0));
 		String colunaDescricao = String.valueOf(table.getValueAt(idx, 1));
 		String colunaVlr = String.valueOf(table.getValueAt(idx, 2));
@@ -152,9 +154,11 @@ public class PainelBuscaProduto extends JFrame {
 		pto.setQuantidade(colunaQtd);
 		pto.setValorDolar(new BigDecimal(colunaVlr));
 		list.add(pto);
+		orcModel = new OrcamentoModel(list);
+//		table.setModel(orcModel);
+		//orcModel.addProdutoOrc(pto);
 		System.out.println("id: "+colunaId+"\ndesc: "+colunaDescricao+"\nQtd: "+colunaQtd+"\nVlor: "+colunaVlr);
-		
-		
+		return pto;
 	}
 
 	protected void busca(String trim) {
@@ -191,8 +195,8 @@ public class PainelBuscaProduto extends JFrame {
 		});
 	}
 
-	public void setOnOkB(Consumer<ProdutoOrc> c) {
-		this.consumerOnOkB = c;
+	public void setOnOkB(Consumer<ProdutoOrc> consumer) {
+		this.consumerOnOkB = consumer;
 		
 	}
 

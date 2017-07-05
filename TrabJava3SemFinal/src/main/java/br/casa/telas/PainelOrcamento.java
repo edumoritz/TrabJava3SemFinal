@@ -245,8 +245,6 @@ public class PainelOrcamento extends JPanel {
 
 	protected void preencherProd(ProdutoOrc t) {
 		UtilSql us = new UtilSql();
-//		BigDecimal qtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
-//		t.setQuantidade(qtd);
 		us.insertSqlProd(t);
 		List<ProdutoOrc> list = us.getTodosP();
 		this.orcModel = new OrcamentoModel(list);

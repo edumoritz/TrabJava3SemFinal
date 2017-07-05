@@ -81,7 +81,7 @@ public class UtilSql {
 
 	private String createTableOrcamento() {
 		StringBuilder sb = new StringBuilder();
-		Produto pt = new Produto();
+		ProdutoOrc pt = new ProdutoOrc();
 		try {
 			Class<?> clazz = pt.getClass();
 
@@ -172,7 +172,7 @@ public class UtilSql {
 	
 	public String insertSqlProd(ProdutoOrc produto) {
 		StringBuilder sb = new StringBuilder();
-		Produto pt = new Produto();
+		ProdutoOrc pt = new ProdutoOrc();
 
 		try {
 			Class<?> clazz = pt.getClass();

@@ -61,7 +61,11 @@ public class OrcamentoModel extends AbstractTableModel {
 		}
 		return null;
 	}
-
+	
+	public void addProdutoOrc(ProdutoOrc pto){
+		this.lista.add(pto);
+		fireTableDataChanged();
+	}
 	public ProdutoOrc getProdutoAt(int idx){
 		if(idx >= this.lista.size()){
 			return null;
