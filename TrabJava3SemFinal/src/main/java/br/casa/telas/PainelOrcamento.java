@@ -267,7 +267,9 @@ public class PainelOrcamento extends JPanel {
 		painelBusca.setVisible(true);
 	}
 	private void totalOrc(){
-		
+		UtilSql us = new UtilSql();
+//		lblResultado = us.sqlTotal();
+		us.sqlTotal();
 	}
 
 	protected void limparCampos() {

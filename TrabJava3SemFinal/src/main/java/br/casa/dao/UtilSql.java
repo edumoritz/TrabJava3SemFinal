@@ -19,6 +19,11 @@ public class UtilSql {
 	private static final String SQL_L_BUSCA_TODOS = "SELECT * FROM produto";
 	private static final String SQL_ORC_BUSCA_TODOS = "SELECT * FROM orcamento";
 	private static final String SQL_ORC_DROP = "DELETE * FROM orcamento WHERE id = ?";
+	private static final String SQL_ORC_TOTAL = "SELECT SUM(quantidade * valordolar) AS quantidae from orcamento";
+//	sql para multiplicação e soma:
+//	
+//	select quantidade * valordolar as quantidade from orcamento
+//	select sum(quantidade * valordolar) as quantidae from orcamento
 
 	public String createTableSql() {
 		StringBuilder sb = new StringBuilder();
@@ -253,6 +258,16 @@ public class UtilSql {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public String sqlTotal(){
+		String str = "SELECT SUM(quantidade * valordolar) AS quantidae from orcamento";
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			System.out.println(ps);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return str;
 	}
 
 	public boolean VerificarNoBanco() {
