@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.casa.planodecontas.ConnectionBD;
-import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
 import br.casa.pojo.ProdutoOrc;
 

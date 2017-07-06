@@ -194,11 +194,10 @@ public class TelaCliente extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		UtilSql us = new UtilSql();
-		if(us.VerificarNoBancoCl() == false){
-			ClasseDao cd = new ClasseDao();
-			cd.createTableSql();
-		}
+//		UtilSql us = new UtilSql();
+//		if(us.VerificarNoBancoCl() == false){
+//			ClasseDao cd = new ClasseDao();
+//			cd.createTableSql();
+//		}
 	}
-
 }

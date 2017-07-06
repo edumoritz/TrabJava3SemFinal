@@ -13,10 +13,14 @@ import br.casa.telas.PainelOrcamento;
 import br.casa.telas.PainelWrepper;
 
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTabbedPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -62,7 +66,7 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
-		JButton btnListaurl = new JButton("ListaURL");
+		JButton btnListaurl = new JButton("Produtos");
 		btnListaurl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abaLista();
@@ -100,7 +104,7 @@ public class TelaPrincipal extends JFrame {
 		PainelWrepper wrapper = new PainelWrepper();
 
 		wrapper.setConteudo(painelOrca);
-		wrapper.setTitulo("Painel de Orçamento");
+		wrapper.setTitulo("Painel de Orï¿½amento");
 
 		wrapper.setAcaoFechar(new ActionListener() {
 
@@ -110,7 +114,7 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
-		tabbedPane.add("Orçamento", wrapper);
+		tabbedPane.add("Orï¿½amento", wrapper);
 
 	}
 

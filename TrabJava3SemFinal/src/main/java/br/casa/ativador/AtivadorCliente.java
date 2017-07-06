@@ -36,7 +36,7 @@ public class AtivadorCliente extends TelaCliente{
 				if(e.getClickCount() == 2){
 					int idx = table.getSelectedRow();
 					if(idx < 0){
-						System.out.println("Não há linha selecionada");
+						System.out.println("Nï¿½o hï¿½ linha selecionada");
 					} else {
 						loadRow(idx);
 					}

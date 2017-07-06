@@ -9,20 +9,13 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Consumer;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
-
-import br.casa.dao.ClasseDao;
 import br.casa.dao.UtilSql;
 import br.casa.pojo.Cliente;
-import br.casa.pojo.Produto;
 import br.casa.pojo.ProdutoOrc;
 import br.casa.tabelas.OrcamentoModel;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -37,6 +30,7 @@ public class PainelOrcamento extends JPanel {
 	private JTextField textTelefone;
 	private OrcamentoModel orcModel;
 	private BigDecimal vlrTotal;
+	private JLabel lblResultado;
 
 	public PainelOrcamento() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -187,8 +181,7 @@ public class PainelOrcamento extends JPanel {
 		gbc_lblTotal.gridy = 3;
 		add(lblTotal, gbc_lblTotal);
 
-		JLabel lblResultado = new JLabel("resultado");
-		//calular resultado..
+		lblResultado = new JLabel("resultado");
 		GridBagConstraints gbc_lblResultado = new GridBagConstraints();
 		gbc_lblResultado.gridx = 1;
 		gbc_lblResultado.gridy = 3;
@@ -272,6 +265,9 @@ public class PainelOrcamento extends JPanel {
 			}
 		});
 		painelBusca.setVisible(true);
+	}
+	private void totalOrc(){
+		
 	}
 
 	protected void limparCampos() {

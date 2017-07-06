@@ -7,20 +7,11 @@ import java.awt.GridBagConstraints;
 import javax.swing.JScrollPane;
 import java.awt.Insets;
 import javax.swing.JTable;
-
-import org.postgresql.util.PSQLException;
-
 import br.casa.ativador.LeitorUrl;
 import br.casa.dao.UtilSql;
-import br.casa.pojo.Cliente;
 import br.casa.pojo.Produto;
-import br.casa.tabelas.ClienteModel;
 import br.casa.tabelas.ProdutoModel;
-
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
