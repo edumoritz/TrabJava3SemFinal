@@ -274,4 +274,22 @@ public class UtilSql {
 		return existe;
 
 	}
+	public boolean VerificarNoBancoCl() {
+		boolean existe = true;
+		String str = "SELECT * FROM cliente";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				existe = false;
+			} else {
+				existe = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Necessita criar uma tabela");
+		}
+		return existe;
+
+	}
 }

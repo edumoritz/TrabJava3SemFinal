@@ -1,24 +1,31 @@
 package br.casa.telas;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+
 import br.casa.dao.ClasseDao;
+import br.casa.dao.UtilSql;
 
 public class TelaCliente extends JPanel {
 	
-	protected static final String CARREGADO_PARA_ALTERACAO = "Carregado para alteração";
+	protected static final String CARREGADO_PARA_ALTERACAO = "Carregado para alteraï¿½ï¿½o";
 	protected JPanel contentPane;
 	protected JTable table;
 	protected JTextField txtId;
@@ -186,6 +193,12 @@ public class TelaCliente extends JPanel {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		UtilSql us = new UtilSql();
+		if(us.VerificarNoBancoCl() == false){
+			ClasseDao cd = new ClasseDao();
+			cd.createTableSql();
+		}
 	}
 
 }
