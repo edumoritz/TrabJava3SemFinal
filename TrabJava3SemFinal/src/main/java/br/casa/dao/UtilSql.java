@@ -249,25 +249,29 @@ public class UtilSql {
 		try {
 			String str = "DELETE * FROM orcamento WHERE id = "+idx;
 			
-//			try {
-//				con.prepareStatement(str).execute();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
+			try {
+				con.prepareStatement(str).execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			System.out.println(str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public String sqlTotal(){
-		String str = "SELECT SUM(quantidade * valordolar) AS quantidae from orcamento";
+	public double sqlTotal(){
+		String str = "SELECT SUM(quantidade * valordolar) AS Soma from orcamento";
+		double soma = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(str);
-			System.out.println(ps);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				soma = rs.getDouble("Soma");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return str;
+		return soma;
 	}
 
 	public boolean VerificarNoBanco() {

@@ -190,6 +190,7 @@ public class PainelOrcamento extends JPanel {
 		UtilSql us = new UtilSql();
 		if(us.VerificarNoBanco() == false){
 			carregaLista();
+			totalOrc();
 		} 
 	}
 	private void carregaLista() {
@@ -268,8 +269,9 @@ public class PainelOrcamento extends JPanel {
 	}
 	private void totalOrc(){
 		UtilSql us = new UtilSql();
-//		lblResultado = us.sqlTotal();
-		us.sqlTotal();
+		double valor = us.sqlTotal();
+		System.out.println(us.sqlTotal());
+		lblResultado.setText(String.valueOf(valor));
 	}
 
 	protected void limparCampos() {
