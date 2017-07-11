@@ -11,6 +11,7 @@ import br.casa.ativador.AtivadorCliente;
 import br.casa.telas.JanelaLista;
 import br.casa.telas.PainelOrcamento;
 import br.casa.telas.PainelWrepper;
+import br.casa.telas.PainelWrepperOrc;
 
 import java.awt.GridBagLayout;
 
@@ -101,10 +102,10 @@ public class TelaPrincipal extends JFrame {
 	protected void abaOrcamento() {
 		JPanel painelOrca = new PainelOrcamento();
 
-		PainelWrepper wrapper = new PainelWrepper();
+		PainelWrepperOrc wrapper = new PainelWrepperOrc();
 
 		wrapper.setConteudo(painelOrca);
-		wrapper.setTitulo("Painel de Or�amento");
+		wrapper.setTitulo("Painel de Or\u00E7amento");
 
 		wrapper.setAcaoFechar(new ActionListener() {
 
