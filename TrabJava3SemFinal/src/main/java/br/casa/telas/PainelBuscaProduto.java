@@ -49,7 +49,7 @@ public class PainelBuscaProduto extends JFrame {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
-		JLabel lblNome = new JLabel("Descrição");
+		JLabel lblNome = new JLabel("Descriï¿½ï¿½o");
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.insets = new Insets(0, 0, 5, 0);
@@ -116,7 +116,7 @@ public class PainelBuscaProduto extends JFrame {
 					e.consume();
 					int idx = table.getSelectedRow();
 					ProdutoOrc pol;
-					pol = loadRow(idx);//FUNÇÃO PEGA VALORES DAS CEDULAS DE UMA LINHA SELECIONADA
+					pol = loadRow(idx);//FUNï¿½ï¿½O PEGA VALORES DAS CEDULAS DE UMA LINHA SELECIONADA
 					PainelBuscaProduto.this.consumerOnOkB.accept(pol);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
@@ -132,7 +132,7 @@ public class PainelBuscaProduto extends JFrame {
 	protected ProdutoOrc loadRow(int idx) {
 		List<ProdutoOrc> list = new ArrayList<>();
 		/*--------------------------------------------------------------*/
-		//inserir linha selecionada mais a quantidade na tabela orçamento
+		//inserir linha selecionada mais a quantidade na tabela orï¿½amento
 		ProdutoOrc pto = new ProdutoOrc();
 		BigDecimal colunaQtd = new BigDecimal(JOptionPane.showInputDialog("Digite a quantidade:"));
 		String colunaId = String.valueOf(table.getValueAt(idx, 0));
@@ -144,7 +144,6 @@ public class PainelBuscaProduto extends JFrame {
 		pto.setValorDolar(new BigDecimal(colunaVlr));
 		list.add(pto);
 		orcModel = new OrcamentoModel(list);
-//		System.out.println("id: "+colunaId+"\ndesc: "+colunaDescricao+"\nQtd: "+colunaQtd+"\nVlor: "+colunaVlr);
 		return pto;
 	}
 

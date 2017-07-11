@@ -1,9 +1,7 @@
 package br.casa.tabelas;
 
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import br.casa.pojo.Produto;
 import br.casa.pojo.ProdutoOrc;
 
 public class OrcamentoModel extends AbstractTableModel {
