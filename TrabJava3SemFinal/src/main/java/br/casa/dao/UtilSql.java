@@ -241,11 +241,11 @@ public class UtilSql {
 	}
 	public void dropRow(Object idx){
 		try {
-			String str = "DELETE * FROM orcamento WHERE id = "+idx;
+			String str = "DELETE FROM orcamento WHERE id = "+idx;
 			
 			try {
 				con.prepareStatement(str).execute();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			System.out.println(str);

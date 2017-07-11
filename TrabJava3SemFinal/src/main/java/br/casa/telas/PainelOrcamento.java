@@ -210,9 +210,9 @@ public class PainelOrcamento extends JPanel {
 			Object value = table.getValueAt(row, column);
 			us.dropRow(value);
 		}
-		
-		table.setModel(orcModel);
-		this.orcModel.fireTableDataChanged();
+		carregaLista();
+		double valor = us.sqlTotal();
+		lblResultado.setText(String.valueOf(valor));
 
 	}
 
@@ -272,7 +272,7 @@ public class PainelOrcamento extends JPanel {
 	private void totalOrc(){
 		UtilSql us = new UtilSql();
 		double valor = us.sqlTotal();
-		System.out.println(us.sqlTotal());
+//		System.out.println(us.sqlTotal());
 		lblResultado.setText(String.valueOf(valor));
 	}
 
