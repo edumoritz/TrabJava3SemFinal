@@ -242,6 +242,8 @@ public class PainelOrcamento extends JPanel {
 		UtilSql us = new UtilSql();
 		us.insertSqlProd(t);
 		List<ProdutoOrc> list = us.getTodosP();
+		double valor = us.sqlTotal();
+		lblResultado.setText(String.valueOf(valor));
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
 		this.orcModel.fireTableDataChanged();
