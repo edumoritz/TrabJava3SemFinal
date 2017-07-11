@@ -32,7 +32,7 @@ public class PainelWrepperOrc extends JPanel{
 		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		labelTitulo = new JLabel("T�tulo");
+		labelTitulo = new JLabel("Título");
 		labelTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);

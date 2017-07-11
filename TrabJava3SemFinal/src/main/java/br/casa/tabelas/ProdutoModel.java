@@ -50,7 +50,7 @@ public class ProdutoModel extends AbstractTableModel {
 		case 0:
 			return "ID";
 		case 1: 
-			return "Descrição";
+			return "Descri\u00E7Ã£o";
 		case 2:
 			return "Dolar";
 		}

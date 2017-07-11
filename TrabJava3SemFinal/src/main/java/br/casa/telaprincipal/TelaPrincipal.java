@@ -115,7 +115,7 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 
-		tabbedPane.add("Or�amento", wrapper);
+		tabbedPane.add("Or\u00E7amento", wrapper);
 
 	}
 
