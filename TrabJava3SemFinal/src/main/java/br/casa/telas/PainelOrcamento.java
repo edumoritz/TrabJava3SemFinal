@@ -29,8 +29,8 @@ public class PainelOrcamento extends JPanel {
 	private JTextField textCliente;
 	private JTextField textTelefone;
 	private OrcamentoModel orcModel;
-	private BigDecimal vlrTotal;
 	private JLabel lblResultado;
+	private double valor;
 
 	public PainelOrcamento() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -211,7 +211,7 @@ public class PainelOrcamento extends JPanel {
 			us.dropRow(value);
 		}
 		carregaLista();
-		double valor = us.sqlTotal();
+		valor = us.sqlTotal();
 		lblResultado.setText(String.valueOf(valor));
 
 	}
@@ -242,7 +242,7 @@ public class PainelOrcamento extends JPanel {
 		UtilSql us = new UtilSql();
 		us.insertSqlProd(t);
 		List<ProdutoOrc> list = us.getTodosP();
-		double valor = us.sqlTotal();
+		valor = us.sqlTotal();
 		lblResultado.setText(String.valueOf(valor));
 		this.orcModel = new OrcamentoModel(list);
 		table.setModel(orcModel);
