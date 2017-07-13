@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.casa.ativador.AtivadorCliente;
+import br.casa.jasper.Report;
 import br.casa.telas.JanelaLista;
 import br.casa.telas.PainelOrcamento;
 import br.casa.telas.PainelWrepper;
@@ -112,6 +113,14 @@ public class TelaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(wrapper);
+			}
+		});
+		wrapper.setAcaoExportar(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Report rp = new Report();
+				rp.exportReport();
 			}
 		});
 

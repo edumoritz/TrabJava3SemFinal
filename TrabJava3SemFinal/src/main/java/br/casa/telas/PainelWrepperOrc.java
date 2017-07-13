@@ -68,4 +68,7 @@ public class PainelWrepperOrc extends JPanel{
 	public void setTitulo(String titulo) {
 		labelTitulo.setText(titulo);
 	}
+	public void setAcaoExportar(ActionListener action){
+		btnExportar.addActionListener(action);		
+	}
 }
